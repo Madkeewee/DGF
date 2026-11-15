@@ -127,6 +127,14 @@ nav{flex-wrap:wrap}
 .alliance-panel dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:0}
 .alliance-panel dt,.alliance-leader span:not(.alliance-portrait){color:var(--accent);font-weight:700}
 .alliance-panel dd{margin:4px 0 0;overflow-wrap:anywhere}
+.diplomacy h2{text-align:center;margin-bottom:18px}
+.diplomacy dl{max-width:960px;margin-inline:auto;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.diplomacy dl>div{padding:14px;border:1px solid var(--line);border-top:2px solid #9c824e;border-radius:6px;background:var(--bg);text-align:center}
+.diplomacy dd{margin-top:8px;color:var(--muted)}
+.diplomacy-tags,.diplomacy-state{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px}
+.diplomacy-tags bdi,.diplomacy-state bdi:first-child{border-radius:4px;background:#3b3222;color:var(--accent);padding:1px 6px;font-weight:700}
+.diplomacy-state+.diplomacy-state{margin-top:5px}
+@media(max-width:620px){.diplomacy dl{grid-template-columns:1fr}}
 .alliance-leader{display:grid;justify-items:center;gap:12px;margin:6px 0 28px;text-align:center}
 .alliance-leader strong{display:block;font-size:1.35rem}
 .alliance-portrait{display:inline-block;width:72px;height:72px;border-radius:8px;background:#493a51 url("./dragonfly-council.webp") var(--portrait,0% 0%)/400% 300% no-repeat}
