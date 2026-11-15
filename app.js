@@ -2,7 +2,6 @@
 
 // Replace this label with the alliance name, tag and state when supplied.
 const allianceLabel = "DGF Alliance HQ";
-document.title = allianceLabel + " | Dark War: Survival";
 document.querySelectorAll("[data-brand]").forEach(node => {
   node.textContent = allianceLabel;
 });
@@ -157,4 +156,4 @@ function createCalculator({title, description, fields, calculate}) {
   return form;
 }
 
-document.querySelector("#calculator-list").append(...calculators.map(createCalculator));
+document.querySelector("#calculator-list")?.append(...calculators.map(createCalculator));
