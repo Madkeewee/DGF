@@ -2,6 +2,13 @@
 *{box-sizing:border-box}
 html{scroll-padding-top:90px}
 body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 "Inter",system-ui,sans-serif}
+@media(min-width:1050px){
+  body{--siege-side:clamp(105px,16vw,400px);isolation:isolate}
+  body::before,body::after{content:"";position:fixed;top:68px;width:var(--siege-side);max-height:calc(100vh - 68px);z-index:-1;pointer-events:none;background-repeat:no-repeat;background-position:center top;background-size:100% 100%,100% auto;mask-image:linear-gradient(#000 78%,transparent)}
+  body::before{left:0;aspect-ratio:352/886;background-image:linear-gradient(90deg,transparent 76%,var(--bg)),url("./siege-left.webp")}
+  body::after{right:0;aspect-ratio:1/2;background-image:linear-gradient(270deg,transparent 76%,var(--bg)),url("./siege-right.webp")}
+  body .wrap{width:min(1120px,calc(100% - 2 * var(--siege-side) - 28px))}
+}
 a{color:var(--accent)}
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 .wrap{width:min(1120px,calc(100% - 40px));margin:auto}
