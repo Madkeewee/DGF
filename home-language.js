@@ -22,12 +22,31 @@ const translations = {
   tr: ["Dil", "DGF üyeleri için sezon haberleri, oyun ipuçları ve savaş planları.", "Sezon", "8. Sezon: Dinozor Çağı", "İpuçları", "İttifak ve oyun ipuçları", "Hesaplayıcılar", "Kaynakları ve yükseltmeleri planla", "Planlayıcı", "Black Gold Battlefield oyuncu listesi ve haritası", "Resmî olmayan Dark War: Survival topluluk rehberi", "Başa dön", "İçeriğe geç"]
 };
 
+const allianceKeys = ["motto", "diplomacy", "napNote", "allies", "interstate", "leadership", "r5", "r4"];
+const allianceCopy = {
+  en: ["Alone we go faster, together we go farther.", "Diplomacy", "Non-aggression pact", "Allies", "Inter-state NAP", "Leadership", "R5 leader", "R4 council"],
+  es: ["Solos vamos más rápido, juntos llegamos más lejos.", "Diplomacia", "Pacto de no agresión", "Aliados", "Pacto entre estados", "Liderazgo", "Líder R5", "Consejo R4"],
+  pt: ["Sozinhos vamos mais rápido, juntos vamos mais longe.", "Diplomacia", "Pacto de não agressão", "Aliados", "Pacto entre estados", "Liderança", "Líder R5", "Conselho R4"],
+  fr: ["Seuls, nous allons plus vite. Ensemble, nous allons plus loin.", "Diplomatie", "Pacte de non-agression", "Alliés", "Pacte inter-États", "Direction", "Chef R5", "Conseil R4"],
+  de: ["Allein sind wir schneller, gemeinsam kommen wir weiter.", "Diplomatie", "Nichtangriffspakt", "Verbündete", "Staatenübergreifender NAP", "Führung", "R5-Anführer", "R4-Rat"],
+  ru: ["Поодиночке мы идём быстрее, вместе — дальше.", "Дипломатия", "Пакт о ненападении", "Союзники", "Межгосударственный пакт", "Руководство", "Лидер R5", "Совет R4"],
+  ar: ["وحدنا نسير أسرع، ومعًا نصل أبعد.", "الدبلوماسية", "ميثاق عدم اعتداء", "الحلفاء", "ميثاق عدم اعتداء بين الولايات", "القيادة", "القائد R5", "مجلس R4"],
+  id: ["Sendiri kita lebih cepat, bersama kita melangkah lebih jauh.", "Diplomasi", "Pakta nonagresi", "Sekutu", "Pakta antarnegara bagian", "Kepemimpinan", "Pemimpin R5", "Dewan R4"],
+  ko: ["혼자서는 더 빨리, 함께라면 더 멀리 갑니다.", "외교", "불가침 협정", "동맹", "서버 간 불가침 협정", "지도부", "R5 연맹장", "R4 간부"],
+  ja: ["一人なら速く、共になら遠くへ。", "外交", "不可侵協定", "友好同盟", "サーバー間不可侵協定", "指導部", "R5 同盟主", "R4 幹部"],
+  "zh-Hans": ["独行更快，同行更远。", "外交", "互不侵犯协议", "盟友", "跨服互不侵犯协议", "管理团队", "R5 盟主", "R4 管理成员"],
+  th: ["ไปคนเดียวได้เร็วกว่า ไปด้วยกันได้ไกลกว่า", "การทูต", "ข้อตกลงไม่รุกราน", "พันธมิตร", "ข้อตกลงไม่รุกรานระหว่างรัฐ", "ผู้นำ", "ผู้นำ R5", "สภา R4"],
+  vi: ["Đi một mình nhanh hơn, đi cùng nhau xa hơn.", "Ngoại giao", "Hiệp ước không xâm phạm", "Đồng minh", "Hiệp ước liên bang", "Ban lãnh đạo", "Thủ lĩnh R5", "Hội đồng R4"],
+  tr: ["Tek başımıza daha hızlı, birlikte daha uzağa gideriz.", "Diplomasi", "Saldırmazlık anlaşması", "Müttefikler", "Eyaletler arası saldırmazlık anlaşması", "Yönetim", "R5 lideri", "R4 konseyi"]
+};
+
 const select = document.querySelector("#home-language");
 const copy = document.querySelectorAll("[data-copy]");
 const storageKey = "dgf-home-language";
 
 function showLanguage(language) {
-  const strings = Object.fromEntries(keys.map((key, i) => [key, translations[language][i]]));
+  const values = [...translations[language], ...allianceCopy[language]];
+  const strings = Object.fromEntries([...keys, ...allianceKeys].map((key, i) => [key, values[i]]));
   document.documentElement.lang = language;
   document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
   select.value = language;

@@ -98,6 +98,37 @@ nav{flex-wrap:wrap}
 .home-links a:hover{border-color:var(--accent)}
 .home-links span{color:var(--muted);font-size:.9rem}
 .notice + .timeline{margin-top:16px}
+.alliance-banner{position:relative;isolation:isolate;display:grid;align-items:end;min-height:clamp(315px,44vw,540px);overflow:hidden;border-radius:10px;border:1px solid #79618a;background:#2d2342}
+.alliance-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%;z-index:-2}
+.alliance-banner::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#120c1ce8 5%,#19102158 65%,transparent);z-index:-1}
+.alliance-banner-copy{padding:clamp(18px,5vw,55px);color:#fff9eb;max-width:850px}
+.alliance-banner-copy .page-title{margin-bottom:14px}
+.alliance-motto{margin:0;font-size:clamp(1.04rem,2.2vw,1.55rem);font-weight:650}
+.alliance-details{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.65fr);gap:14px;margin-top:28px}
+.alliance-panel{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:clamp(15px,3vw,24px)}
+.alliance-panel h2{font-size:clamp(1.6rem,4vw,2.4rem)}
+.alliance-panel dl{margin:0}
+.alliance-panel dl div+div{border-top:1px solid var(--line);margin-top:13px;padding-top:13px}
+.alliance-panel dt,.alliance-leader span:not(.alliance-portrait){color:var(--accent);font-weight:700}
+.alliance-panel dd{margin:4px 0 0;overflow-wrap:anywhere}
+.alliance-leader{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.alliance-leader strong{display:block;font-size:1.2rem}
+.alliance-portrait{display:inline-block;width:46px;height:46px;flex:0 0 auto;border-radius:7px;background:#493a51 url("./dragonfly-council.webp") var(--portrait,0% 0%)/400% 300% no-repeat}
+.alliance-leader .alliance-portrait{width:66px;height:66px}
+.council{margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;list-style:none}
+.council li{display:flex;gap:8px;align-items:center;overflow-wrap:anywhere;min-width:0}
+.season-index{display:flex;gap:8px 14px;flex-wrap:wrap;margin:20px 0 0;padding:12px 0;border-block:1px solid var(--line)}
+.season-index a{text-underline-offset:3px}
+.season-chapter{margin:0;padding:36px 0 24px;border-bottom:1px solid var(--line)}
+.season-chapter h2{max-width:28ch}
+.season-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,4vw,42px);align-items:start}
+.season-columns h3:not(:first-child){margin-top:18px}
+.season-chapter li{margin-bottom:8px}
+.guide-art{margin:0 0 22px}
+.guide-art img{display:block;width:100%;height:clamp(180px,29vw,340px);object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+.guide-art figcaption{color:var(--muted);font-size:.85rem;margin-top:5px}
+@media(max-width:700px){.alliance-details,.season-columns{grid-template-columns:1fr}}
+@media(max-width:390px){.council{grid-template-columns:1fr}}
 @media(max-width:760px){.home-links{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:420px){.home-links{grid-template-columns:1fr}}
 @media(max-width:620px){.roster-grid{grid-template-columns:1fr}}
