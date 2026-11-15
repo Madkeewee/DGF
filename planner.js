@@ -81,7 +81,7 @@ function card([marker, title, color], lines, summary) {
 }
 
 const open = document.querySelector("#open-bgb");
-open.addEventListener("click", () => {
+open?.addEventListener("click", () => {
   const panel = document.querySelector("#bgb");
   panel.hidden = !panel.hidden;
   open.setAttribute("aria-expanded", String(!panel.hidden));
