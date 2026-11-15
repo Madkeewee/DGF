@@ -6,8 +6,8 @@
   <meta name="description" content="Assign the DGF roster for Dark War: Survival Black Gold Battlefield.">
   <title>Black Gold Battlefield | DGF Alliance HQ</title>
   <link rel="stylesheet" href="./style.css?v=wide-siege">
-  <link rel="stylesheet" href="./bgb.css">
-  <script src="./planner.js?v=standalone" defer></script>
+  <link rel="stylesheet" href="./bgb.css?v=saved-roster">
+  <script src="./planner.js?v=saved-roster" defer></script>
 </head>
 <body class="bgb-page">
   <a class="skip" href="#main">Skip to content</a>
@@ -23,17 +23,25 @@
         <p class="eyebrow">DGF Alliance HQ · Event planner</p>
         <h1 class="page-title">Black Gold Battlefield</h1>
         <figure class="page-art bgb-banner"><img src="./black-gold-desert.webp" width="1800" height="600" alt="A round gold alloy nugget at a desert factory, with oil refineries, a military base and a field hospital."></figure>
-        <p class="section-intro">Enter 20 player names and strongest march CP values. The generator creates six refinery pairs, two standby pairs and four numbered floaters.</p>
+        <p class="section-intro">Save the alliance roster, update each player’s strongest march CP, and select 20 starters for Team A or Team B.</p>
         <details class="bgb-guide">
           <summary>How to run the plan</summary>
           <p>This map assumes a lower-left start. R1–R6 cover the six Oil Refineries. The Hospital and Military pairs stage near their objectives and wait for them to open.</p>
           <p>Floaters reinforce as called, then stage near the Rare Earth Factory before each alloy spawn. Floater 1 is the primary carrier, Floater 2 is backup, and Floaters 3 and 4 protect the active carrier back to HQ.</p>
           <p>CP is the generator’s only input for strength. The caller can adjust for march speed, survivability and attendance before sharing. <a href="https://rdrzteam.com/black-gold-battlefield/">RDRZ strategy guide</a> · <a href="https://z-war.icu/posts/black-gold-battlefield-team-planner/">Z-War team guide</a> · <a href="https://www.packsify.com/blogs/dark-war-survival-black-gold-battlefield">Packsify guide</a></p>
         </details>
-        <form id="roster">
+        <form id="roster" novalidate>
           <fieldset>
             <legend>Player roster</legend>
-            <p>CP accepts full numbers or shorthand such as 350M and 1.2B. Use in-game player names.</p>
+            <p>Names and CP are shared between teams. Each team’s starter list is saved separately in this browser. Only selected starters appear in the plan. CP accepts values such as 350M and 1.2B.</p>
+            <div class="roster-actions">
+              <label for="bgb-team">Match team</label>
+              <select id="bgb-team"><option value="A">Team A</option><option value="B">Team B</option></select>
+              <button type="button" id="add-player">Add player</button>
+              <button type="button" id="clear-starters">Clear starter selection</button>
+              <span id="starter-count" aria-live="polite"></span>
+            </div>
+            <p id="roster-storage-status" role="status"></p>
             <div id="players" class="roster-grid"></div>
           </fieldset>
           <button type="submit">Generate assignments</button>

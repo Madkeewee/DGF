@@ -15,13 +15,19 @@ const plan = document.querySelector("#plan");
 const message = document.querySelector("#plan-text");
 const copyStatus = document.querySelector("#copy-status");
 const format = new Intl.NumberFormat(undefined, {notation: "compact", maximumFractionDigits: 2});
+const teamPicker = document.querySelector("#bgb-team");
+const addPlayer = document.querySelector("#add-player");
+const starterCount = document.querySelector("#starter-count");
+const storageStatus = document.querySelector("#roster-storage-status");
+const storageKey = "dgf-bgb-roster-v1";
+const rows = [];
+let team = "A";
 
 function addField(parent, title, placeholder) {
   const label = document.createElement("label");
   label.textContent = title;
   const input = document.createElement("input");
   input.type = "text";
-  input.required = true;
   input.maxLength = 60;
   input.placeholder = placeholder;
   label.append(input);
@@ -29,14 +35,94 @@ function addField(parent, title, placeholder) {
   return input;
 }
 
-const rows = Array.from({length: 20}, (_, index) => {
+function addRosterRow({name = "", cp = "", A = false, B = false} = {}) {
   const row = document.createElement("div");
   row.className = "roster-row";
   document.querySelector("#players").append(row);
-  return {
-    name: addField(row, `Player ${index + 1} name`, "In-game name"),
-    cp: addField(row, "CP", "e.g. 350M")
+  const player = {
+    name: addField(row, "Player name", "In-game name"),
+    cp: addField(row, "CP", "e.g. 350M"),
+    selected: {A, B}
   };
+  player.name.value = name;
+  player.cp.value = cp;
+  const controls = document.createElement("div");
+  controls.className = "roster-controls";
+  const label = document.createElement("label");
+  const starter = document.createElement("input");
+  starter.type = "checkbox";
+  starter.checked = player.selected[team];
+  player.starter = starter;
+  label.append(starter, "Starter");
+  const remove = document.createElement("button");
+  remove.type = "button";
+  remove.textContent = "Remove";
+  controls.append(label, remove);
+  row.append(controls);
+  starter.addEventListener("input", () => { player.selected[team] = starter.checked; });
+  remove.addEventListener("click", () => {
+    const name = player.name.value.trim();
+    if (name && !window.confirm(`Remove ${name} from the roster and both teams?`)) return;
+    const index = rows.indexOf(player);
+    rows.splice(index, 1);
+    row.remove();
+    (rows[index]?.name ?? rows[index - 1]?.name ?? addPlayer)?.focus();
+    rosterChanged();
+  });
+  rows.push(player);
+  return player;
+}
+
+function loadRoster() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(storageKey));
+    if (Array.isArray(stored?.players) && stored.players.every(player =>
+      typeof player?.name === "string" && typeof player.cp === "string" &&
+      typeof player.A === "boolean" && typeof player.B === "boolean")) {
+      team = stored.team === "B" ? "B" : "A";
+      return stored.players;
+    }
+  } catch {
+    if (storageStatus) storageStatus.textContent = "Saved roster could not be loaded.";
+  }
+  return Array.from({length: 20}, () => ({A: true}));
+}
+
+function showStarterCount() {
+  if (starterCount) starterCount.textContent = `Team ${team} · ${rows.filter(row => row.selected[team]).length} / 20 starters`;
+}
+
+function rosterChanged() {
+  plan.hidden = true;
+  status.textContent = "";
+  showStarterCount();
+  try {
+    const players = rows.map(row => ({ name: row.name.value, cp: row.cp.value, ...row.selected }));
+    localStorage.setItem(storageKey, JSON.stringify({team, players}));
+    if (storageStatus) storageStatus.textContent = "";
+  } catch {
+    if (storageStatus) storageStatus.textContent = "This browser could not save the roster. Keep the page open to retain your edits.";
+  }
+}
+
+loadRoster().forEach(addRosterRow);
+if (teamPicker) teamPicker.value = team;
+showStarterCount();
+teamPicker?.addEventListener("change", () => {
+  team = teamPicker.value;
+  rows.forEach(row => { row.starter.checked = row.selected[team]; });
+  rosterChanged();
+});
+addPlayer?.addEventListener("click", () => {
+  addRosterRow().name.focus();
+  rosterChanged();
+});
+document.querySelector("#clear-starters")?.addEventListener("click", () => {
+  rows.forEach(row => {
+    row.selected[team] = false;
+    row.starter.checked = false;
+  });
+  rosterChanged();
 });
 
 function readPower(input) {
@@ -87,19 +173,23 @@ open?.addEventListener("click", () => {
   open.setAttribute("aria-expanded", String(!panel.hidden));
 });
 
-form.addEventListener("input", () => {
-  plan.hidden = true;
-  status.textContent = "";
+form.addEventListener("input", event => {
+  if (event.target !== teamPicker) rosterChanged();
 });
 form.addEventListener("submit", event => {
   event.preventDefault();
   const names = new Set();
+  const starters = rows.filter(row => row.selected[team]);
+  if (starters.length !== 20) {
+    status.textContent = `Select exactly 20 starters for Team ${team}. You selected ${starters.length}.`;
+    return;
+  }
   const players = [];
-  for (const [index, row] of rows.entries()) {
+  for (const [index, row] of starters.entries()) {
     const name = row.name.value.trim();
     const cp = readPower(row.cp.value);
     if (!name || names.has(name.toLowerCase()) || !Number.isFinite(cp)) {
-      status.textContent = `Player ${index + 1} needs a unique name and positive CP. Example: 350M.`;
+      status.textContent = `Starter ${index + 1} needs a unique name and positive CP. Example: 350M.`;
       (!name || names.has(name.toLowerCase()) ? row.name : row.cp).focus();
       return;
     }
@@ -117,7 +207,7 @@ form.addEventListener("submit", event => {
   cards.push(card(["F", "Floaters", "#a3d6ff"], floatLines, "Stage near the Rare Earth Factory."));
   document.querySelector("#squads").replaceChildren(...cards);
   message.value = [
-    "DGF BGB PLAN · Lower-left start",
+    `DGF BGB PLAN · Team ${team} · Lower-left start`,
     ...pairs.map((members, index) => {
       const [marker, title] = objectives[index];
       return `${marker} | ${title}: ${members.map(label).join(", ")}`;
@@ -127,7 +217,7 @@ form.addEventListener("submit", event => {
     "Hospital and Military pairs stage nearby and wait for their objectives to open. Floaters stage before alloy spawns. Floaters 3 and 4 escort the active carrier to HQ."
   ].join("\n");
   plan.hidden = false;
-  status.textContent = "Assigned all 20 players.";
+  status.textContent = `Assigned all 20 Team ${team} starters.`;
   copyStatus.textContent = "";
 });
 
