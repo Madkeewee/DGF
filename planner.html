@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dark War: Survival alliance field guide, Season 8 briefing and calculators.">
+  <title>Planner | DGF Alliance HQ</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./planner.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top"><div class="wrap bar">
+    <a class="brand" href="./index.html"><span class="mark" aria-hidden="true">HQ</span><span data-brand>DGF Alliance HQ</span></a>
+    <nav aria-label="Main"><a href="./index.html#season">Season</a><a href="./tips.html">Tips</a><a href="./calculators.html">Calculators</a><a href="./planner.html" aria-current="page">Planner</a></nav>
+  </div></header>
+  <main id="main" class="wrap">
+    <section class="section">
+      <p class="eyebrow">Alliance planning</p>
+      <h1 class="page-title">Planner</h1>
+      <button type="button" id="open-bgb" aria-controls="bgb" aria-expanded="false">BGB Plan</button>
+      <noscript>Enable JavaScript to use the planner.</noscript>
+      <div id="bgb" class="bgb" hidden>
+        <h2>Black Gold Battlefield</h2>
+        <p class="section-intro">Enter each player’s strongest march CP using the same in-game screen. The top four float, and the strongest two are primary and backup alloy carriers. The other 16 are split across four defence squads with comparable CP.</p>
+        <details class="bgb-guide">
+          <summary>How to run the plan</summary>
+          <p>Confirm your starting side and update the objective names before sharing. Hold the Factory perimeter and Military Base, use the Hospital squad for sustain, and have the Refineries squad hold nearby points. Floaters can teleport to reinforce when called.</p>
+          <p>Stage the floaters at the Rare Earth Factory a few minutes before each alloy spawn. Check the live event timer. Once the primary or backup carrier picks up the alloy, the other floaters escort them to HQ. Defence squads hold their positions unless the caller redirects them.</p>
+          <p>CP is the generator’s only input for strength. The caller can adjust for march speed, survivability and attendance before sharing. <a href="https://rdrzteam.com/black-gold-battlefield/">RDRZ strategy guide</a> · <a href="https://z-war.icu/posts/black-gold-battlefield-team-planner/">Z-War team guide</a> · <a href="https://www.packsify.com/blogs/dark-war-survival-black-gold-battlefield">Packsify guide</a></p>
+        </details>
+        <form id="roster">
+          <fieldset>
+            <legend>Defence objectives</legend>
+            <div id="objectives" class="fields"></div>
+          </fieldset>
+          <fieldset>
+            <legend>Player roster</legend>
+            <p>CP accepts full numbers or shorthand such as 350M and 1.2B. Use in-game player names.</p>
+            <div id="players" class="roster-grid"></div>
+          </fieldset>
+          <button type="submit">Generate assignments</button>
+          <p id="planner-status" role="status"></p>
+        </form>
+        <section id="plan" hidden aria-labelledby="plan-title">
+          <h2 id="plan-title">Assignments</h2>
+          <div id="squads" class="tips"></div>
+          <label class="share-plan">Alliance chat message
+            <textarea id="plan-text" readonly rows="9"></textarea>
+          </label>
+          <button type="button" id="copy-plan">Copy plan</button>
+          <p id="copy-status" role="status"></p>
+        </section>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap footer"><span data-brand>DGF Alliance HQ</span><span>Unofficial Dark War: Survival community guide</span><a href="#main">Back to top</a></footer>
+</body>
+</html>

@@ -72,6 +72,18 @@ output{display:block;min-height:1.5em;margin-top:12px;white-space:pre-line;color
 .directory a:hover{border-color:var(--accent)}
 .directory small{font-weight:400}
 .footer{justify-content:space-between;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:50px;padding:20px 0}
+nav{flex-wrap:wrap}
+.bgb{margin-top:30px}
+.bgb-guide{margin-bottom:16px}
+.bgb fieldset{min-width:0;border:1px solid var(--line);margin:0 0 16px;padding:12px}
+.bgb legend{padding:0 6px;font-weight:750}
+.roster-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 20px}
+.roster-row{display:grid;grid-template-columns:2fr minmax(76px,1fr);gap:8px}
+.bgb [role=status]{margin:10px 0 0;color:var(--accent)}
+.bgb #plan{margin-top:30px}
+.bgb #squads ul{padding-left:20px;overflow-wrap:anywhere}
+.share-plan{margin:16px 0 10px}
+@media(max-width:620px){.roster-grid{grid-template-columns:1fr}}
 @media(max-width:800px){.hero{gap:20px}.map{min-height:280px}.timeline,.tips,.directory{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.wrap{width:calc(100% - 28px)}.bar{flex-wrap:wrap;gap:5px;padding:8px 0}.hero,.tools,.timeline,.tips,.directory{grid-template-columns:1fr}.hero{padding-top:35px}.map{min-height:245px}.ring{max-width:190px}.ring.inner{max-width:130px}.notice{display:block}.notice strong{display:block}.section{padding-top:36px}}
 @media(max-width:700px){.briefing-grid{grid-template-columns:1fr}.hero-art{aspect-ratio:3/2}}
