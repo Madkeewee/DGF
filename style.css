@@ -82,6 +82,12 @@ nav{flex-wrap:wrap}
 .bgb [role=status]{margin:10px 0 0;color:var(--accent)}
 .bgb #plan{margin-top:30px}
 .bgb #squads ul{padding-left:20px;overflow-wrap:anywhere}
+.bgb-map{max-width:650px;margin:0 auto 18px}
+.bgb-map svg{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px}
+.bgb-map figcaption{margin-top:7px;color:var(--muted)}
+.bgb #squads article{border-top:3px solid var(--assignment-color)}
+.bgb-marker{display:inline-block;margin-right:7px;padding:3px 6px;border-radius:4px;background:var(--assignment-color);color:#211a13;font-size:.8rem}
+.bgb-carrier{color:var(--accent)}
 .share-plan{margin:16px 0 10px}
 @media(max-width:620px){.roster-grid{grid-template-columns:1fr}}
 @media(max-width:800px){.hero{gap:20px}.map{min-height:280px}.timeline,.tips,.directory{grid-template-columns:repeat(2,1fr)}}

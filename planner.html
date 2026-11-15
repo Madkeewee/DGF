@@ -22,18 +22,14 @@
       <noscript>Enable JavaScript to use the planner.</noscript>
       <div id="bgb" class="bgb" hidden>
         <h2>Black Gold Battlefield</h2>
-        <p class="section-intro">Enter each player’s strongest march CP using the same in-game screen. The top four float, and the strongest two are primary and backup alloy carriers. The other 16 are split across four defence squads with comparable CP.</p>
+        <p class="section-intro">Enter 20 player names and strongest march CP values. The generator creates six refinery pairs, two standby pairs and four numbered floaters.</p>
         <details class="bgb-guide">
           <summary>How to run the plan</summary>
-          <p>Confirm your starting side and update the objective names before sharing. Hold the Factory perimeter and Military Base, use the Hospital squad for sustain, and have the Refineries squad hold nearby points. Floaters can teleport to reinforce when called.</p>
-          <p>Stage the floaters at the Rare Earth Factory a few minutes before each alloy spawn. Check the live event timer. Once the primary or backup carrier picks up the alloy, the other floaters escort them to HQ. Defence squads hold their positions unless the caller redirects them.</p>
+          <p>This map assumes a lower-left start. R1–R6 cover the six Oil Refineries. The Hospital and Military pairs stage near their objectives and wait for them to open.</p>
+          <p>Floaters reinforce as called, then stage near the Rare Earth Factory before each alloy spawn. Floater 1 is the primary carrier, Floater 2 is backup, and Floaters 3 and 4 protect the active carrier back to HQ.</p>
           <p>CP is the generator’s only input for strength. The caller can adjust for march speed, survivability and attendance before sharing. <a href="https://rdrzteam.com/black-gold-battlefield/">RDRZ strategy guide</a> · <a href="https://z-war.icu/posts/black-gold-battlefield-team-planner/">Z-War team guide</a> · <a href="https://www.packsify.com/blogs/dark-war-survival-black-gold-battlefield">Packsify guide</a></p>
         </details>
         <form id="roster">
-          <fieldset>
-            <legend>Defence objectives</legend>
-            <div id="objectives" class="fields"></div>
-          </fieldset>
           <fieldset>
             <legend>Player roster</legend>
             <p>CP accepts full numbers or shorthand such as 350M and 1.2B. Use in-game player names.</p>
@@ -44,6 +40,29 @@
         </form>
         <section id="plan" hidden aria-labelledby="plan-title">
           <h2 id="plan-title">Assignments</h2>
+          <figure class="bgb-map">
+<svg class="battlefield" viewBox="0 0 560 535" role="img" aria-labelledby="bgb-field-title">
+      <title id="bgb-field-title">Six numbered oil refineries, lower-side hospital and military standby markers, and floater staging beside the central Rare Earth Factory.</title>
+      <image href="./bgb-battlefield.jpg" width="560" height="535" preserveAspectRatio="none"/>
+      <g fill="#211a13" font-family="system-ui,sans-serif" font-size="16" font-weight="800">
+        <g transform="translate(196 153)"><title>Oil Refinery 1</title><rect x="-18" y="-13" width="36" height="26" rx="5" fill="#ffb473" stroke="#221b15" stroke-width="2"/><text text-anchor="middle" y="6">R1</text></g>
+        <g transform="translate(451 153)"><title>Oil Refinery 2</title><rect x="-18" y="-13" width="36" height="26" rx="5" fill="#f79b72" stroke="#221b15" stroke-width="2"/><text text-anchor="middle" y="6">R2</text></g>
+        <g transform="translate(111 290)"><title>Oil Refinery 3</title><rect x="-18" y="-13" width="36" height="26" rx="5" fill="#e9cd70" stroke="#221b15" stroke-width="2"/><text text-anchor="middle" y="6">R3</text></g>
+        <g transform="translate(455 290)"><title>Oil Refinery 4</title><rect x="-18" y="-13" width="36" height="26" rx="5" fill="#c9da78" stroke="#221b15" stroke-width="2"/><text text-anchor="middle" y="6">R4</text></g>
+        <g transform="translate(196 412)"><title>Oil Refinery 5</title><rect x="-18" y="-13" width="36" height="26" rx="5" fill="#e3ace8" stroke="#221b15" stroke-width="2"/><text text-anchor="middle" y="6">R5</text></g>
+        <g transform="translate(451 412)"><title>Oil Refinery 6</title><rect x="-18" y="-13" width="36" height="26" rx="5" fill="#f39cb4" stroke="#221b15" stroke-width="2"/><text text-anchor="middle" y="6">R6</text></g>
+        <g transform="translate(321 492)"><title>Hospital standby</title><rect x="-18" y="-13" width="36" height="26" rx="5" fill="#a8df9c" stroke="#221b15" stroke-width="2"/><text text-anchor="middle" y="6">H</text></g>
+        <g transform="translate(475 517)"><title>Military standby</title><rect x="-18" y="-13" width="36" height="26" rx="5" fill="#ff9991" stroke="#221b15" stroke-width="2"/><text text-anchor="middle" y="6">M</text></g>
+        <g transform="translate(345 274)"><title>Floaters 1–4</title><rect x="-18" y="-13" width="36" height="26" rx="5" fill="#a3d6ff" stroke="#221b15" stroke-width="2"/><text text-anchor="middle" y="6">F</text></g>
+      </g>
+      <g fill="#f8f3e5" stroke="#33271b" stroke-width="3" paint-order="stroke" font-family="system-ui,sans-serif" font-size="15" font-weight="750">
+        <text x="209" y="337">Rare Earth Factory</text>
+        <text x="23" y="70">Military</text><text x="245" y="109">Hospital</text>
+        <text x="18" y="493">DGF HQ</text><text x="427" y="78">Opposing HQ</text>
+      </g>
+    </svg>
+<figcaption>Lower-left start. Match each marker to its roster below. Pins show approximate staging areas.</figcaption>
+</figure>
           <div id="squads" class="tips"></div>
           <label class="share-plan">Alliance chat message
             <textarea id="plan-text" readonly rows="9"></textarea>
